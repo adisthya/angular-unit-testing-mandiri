@@ -1,0 +1,31 @@
+<div class="container-lg">
+  <div class="row form-login justify-content-center">
+    <div class="col-4 my-auto">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title fs-4 text-center">Login</h2>
+          <h3 class="card-subtitle fs-6 text-center">Silakan login sebelum melanjutkan</h3>
+          <form class="my-3 mt-5" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+            <div class="input-group mb-3 has-validation">
+              <span class="input-group-text">
+                <i class="bi-person"></i>
+              </span>
+              <input type="text" class="form-control  {{ isFieldValid('username') }}"
+                     placeholder="Username" formControlName="username">
+            </div>
+            <div class="input-group mb-3 has-validation">
+              <span class="input-group-text">
+                <i class="bi-key"></i>
+              </span>
+              <input type="password" class="form-control {{ isFieldValid('password') }}"
+                     placeholder="Password" formControlName="password">
+            </div>
+            <div class="d-grid gap-1 mb-2">
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
