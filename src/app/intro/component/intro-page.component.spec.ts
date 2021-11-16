@@ -1,8 +1,9 @@
 // fungsi untuk mengkonversi rgb value ke hex value color code.
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BsButtonDirective } from '../../shared/directives/bs-button.directive';
 import { HighlightDirective } from '../../shared/directives/highlight.directive';
 import { IntroPageComponent } from './intro-page.component';
 
@@ -16,7 +17,7 @@ describe('5. IntroPageComponent test scenario', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ IntroPageComponent, HighlightDirective ],
+      declarations: [ IntroPageComponent, HighlightDirective, BsButtonDirective ],
       imports: [ CommonModule ],
     });
 
@@ -85,6 +86,30 @@ describe('5. IntroPageComponent test scenario', () => {
 
       console.log(highlight.style.backgroundColor);
       expect(rgb2hex(highlight.style.backgroundColor)).toMatch(expectedColor);
+    });
+  });
+
+  describe('5.4. BsButton directive should be applied', () => {
+    it('should have applied to 2 elements', () => {
+      const buttons = debugElement.queryAll(By.directive(BsButtonDirective));
+      expect(buttons.length).toBe(2);
+    });
+
+    it('target elements should have class btn-link', () => {
+      const buttons = debugElement.queryAll(By.directive(BsButtonDirective));
+
+      buttons.forEach((element: DebugElement) => {
+        expect(Object.keys(element.classes)).toContain('btn-link');
+      });
+    });
+  });
+
+  describe('5.5 TitleCasePipe should works', () => {
+    it('"angular unit test" should have changed to "Angular Unit Test"',  () => {
+      const titleUppercase = 'angular unit test';
+      const titleCase: TitleCasePipe = new TitleCasePipe();
+
+      expect(titleCase.transform(titleUppercase)).toEqual('Angular Unit Test');
     });
   });
 });
